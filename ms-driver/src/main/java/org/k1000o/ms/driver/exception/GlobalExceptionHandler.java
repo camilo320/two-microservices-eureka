@@ -28,9 +28,7 @@ public class GlobalExceptionHandler {
             HttpServletRequest request
     ) {
         Map<String, String> errors = new HashMap<>();
-        exp.getBindingResult().getFieldErrors().forEach(err -> {
-            errors.put(err.getField(), err.getDefaultMessage());
-        });
+        exp.getBindingResult().getFieldErrors().forEach(err -> errors.put(err.getField(), err.getDefaultMessage()));
         return response(request.getRequestURI(), exp.getMessage(),HttpStatus.BAD_REQUEST,errors);
     }
     @ExceptionHandler(Exception.class)
